@@ -52,7 +52,7 @@ export default function UserButton() {
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={() => {
-                signOut();
+                signOut({ callbackUrl: "/", redirect: true });
               }}
             >
               <div className="flex items-center gap-x-1">

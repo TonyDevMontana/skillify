@@ -36,7 +36,8 @@ export function UploadedThumbnailPicture({
         className="rounded-md"
         src={imageUrl}
         alt="profile picture"
-        fill
+        height={240}
+        width={384}
         priority={true}
         onLoadingComplete={() => {
           setIsLoading(false);

@@ -34,9 +34,9 @@ export function UploadedProfilePicture({ imageUrl }: { imageUrl: string }) {
         className="rounded-md"
         src={imageUrl}
         alt="profile picture"
-        fill
+        height={240}
+        width={240}
         priority={true}
-        sizes="240px"
         onLoadingComplete={() => {
           setIsLoading(false);
           setIsInputDisabled(false);

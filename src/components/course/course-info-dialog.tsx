@@ -53,13 +53,13 @@ export function CourseInfoDialog({
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsOpen(false);
     const result = await updateCourseData({
       courseId: course?.id || "",
       name: values.name,
       price: values.price,
       about: values.about,
     });
-    setIsOpen(false);
 
     if (!result.success) {
       toast({ title: "Something went wrong", variant: "destructive" });
