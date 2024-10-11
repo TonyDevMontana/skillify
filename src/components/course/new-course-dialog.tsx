@@ -57,9 +57,6 @@ export function NewCourse({ children }: { children: React.ReactNode }) {
       router.push(`/creator/course/${result.data?.id}`);
       toast({ title: "Course Created Successfully!", variant: "message" });
     }
-
-    setIsOpen(false);
-    setIsPending(false);
   }
 
   return (
