@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import db from "@/server/db";
 import Link from "next/link";
 import { Box, ChevronLeft } from "lucide-react";
+import { cache } from "react";
 
 const ChapterList = dynamic(
   () => import("@/components/creator-course/chapter-list"),
@@ -16,11 +17,15 @@ const ChapterList = dynamic(
   }
 );
 
-export async function CourseContent({ id }: { id: string }) {
-  const course = await db.course.findUnique({
+const getCourseData = cache(async (id: string) => {
+  return await db.course.findUnique({
     where: { id },
     include: { chapters: true },
   });
+});
+
+export async function CourseContent({ id }: { id: string }) {
+  const course = await getCourseData(id);
 
   if (!course) {
     redirect("/creator/courses");

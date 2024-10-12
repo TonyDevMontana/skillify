@@ -3,15 +3,20 @@ import { ProfileBio } from "@/components/profile/profile-bio";
 import { ProfilePhoto } from "@/components/profile/profile-photo";
 import { auth } from "@/server/auth";
 import db from "@/server/db";
+import { cache } from "react";
+
+const getCreatorProfile = cache(async (id: string) => {
+  return await db.creator.findUnique({
+    where: {
+      id,
+    },
+  });
+});
 
 export async function CreatorProfile() {
   const session = await auth();
-  const creator = await db.creator.findUnique({
-    where: {
-      id: session?.user.creatorId,
-    },
-  });
-
+  const creatorId = session?.user.creatorId ?? "";
+  const creator = await getCreatorProfile(creatorId);
   return (
     <div className="flex flex-col lg:flex-row w-full gap-10">
       <div className="flex flex-col lg:flex-col md:flex-row gap-6 mx-auto">

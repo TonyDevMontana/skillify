@@ -1,12 +1,12 @@
 import { auth } from "@/server/auth";
 import db from "@/server/db";
-import { CreatorCoursesTable } from "./creator-courses-table";
+import { CreatorCoursesTable } from "@/components/creator-course/creator-courses-table";
+import { cache } from "react";
 
-async function fetchCourses() {
-  const session = await auth();
+const getCourses = cache(async (id: string) => {
   return db.creator.findUnique({
     where: {
-      id: session?.user.creatorId,
+      id,
     },
     select: {
       id: true,
@@ -20,9 +20,11 @@ async function fetchCourses() {
       },
     },
   });
-}
+});
 
 export async function CreatorCoursesData() {
-  const courses = await fetchCourses();
+  const session = await auth();
+  const creatorId = session?.user.creatorId ?? "";
+  const courses = await getCourses(creatorId);
   return <CreatorCoursesTable courses={courses?.courses} />;
 }

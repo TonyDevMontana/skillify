@@ -3,17 +3,23 @@ import db from "@/server/db";
 import { ChevronLeft, FilePenLine } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { cache } from "react";
+
+const getChapterData = cache(async (id: string) => {
+  return await db.chapter.findUnique({
+    where: {
+      id,
+    },
+  });
+});
 
 export default async function ChapterContent({
   chapterId,
 }: {
   chapterId: string;
 }) {
-  const chapter = await db.chapter.findUnique({
-    where: {
-      id: chapterId,
-    },
-  });
+  const chapter = await getChapterData(chapterId);
+
   if (!chapter) {
     redirect("/creator/courses");
   }

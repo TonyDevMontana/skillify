@@ -36,7 +36,7 @@ export function Hero() {
             Learn from the
             <span className="text-orange-500">
               {" "}
-              world&#39;s best instructor
+              world&#39;s best instructors
             </span>
           </div>
         </div>
