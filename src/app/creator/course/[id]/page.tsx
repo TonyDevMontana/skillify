@@ -2,6 +2,8 @@ import { Suspense } from "react";
 import { CourseContent } from "@/components/creator-course/course-content";
 import { Spinner } from "@/components/spinner";
 
+export const revalidate = 3600;
+
 export default function Course({ params }: { params: { id: string } }) {
   return (
     <div className="px-14 md:mx-0 w-full">

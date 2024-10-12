@@ -2,6 +2,8 @@ import ChapterContent from "@/components/creator-course/chapter-content";
 import { Spinner } from "@/components/spinner";
 import { Suspense } from "react";
 
+export const revalidate = 3600;
+
 export default async function Page({ params }: { params: { id: string } }) {
   return (
     <div className="px-14 md:mx-0 w-full">
