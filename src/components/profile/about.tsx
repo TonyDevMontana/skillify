@@ -20,7 +20,7 @@ export function About({ initialValue }: { initialValue: string }) {
 
   if (loading) {
     return (
-      <div className="relative w-full min-h-96 flex justify-center items-center">
+      <div className="relative w-full md:min-h-96 flex justify-center items-center">
         <Spinner />
       </div>
     );

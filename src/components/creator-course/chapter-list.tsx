@@ -14,7 +14,7 @@ import { Chapter } from "@prisma/client";
 import Link from "next/link";
 import { toast } from "@/hooks/use-toast";
 
-export default function VideoChapterList({
+export default function ChapterList({
   chapters,
   courseId,
 }: {

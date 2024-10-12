@@ -3,8 +3,12 @@ import { ProfileBioDialog } from "@/components/profile/profile-bio-dialog";
 import Link from "next/link";
 import { Pencil } from "lucide-react";
 import { Creator } from "@prisma/client";
+import { cn } from "@/lib/utils";
 
 export async function ProfileBio({ creator }: { creator: Creator | null }) {
+  const url = creator?.linkedInUrl;
+  const isValidUrl = url && url.trim() !== "" && url !== "#";
+
   return (
     <div>
       <div className="mb-4 w-full">
@@ -18,13 +22,25 @@ export async function ProfileBio({ creator }: { creator: Creator | null }) {
       </div>
       <div className="mb-4">
         <div>LinkedIn:</div>
-        <div className="text-xl text-orange-600 hover:text-orange-200">
-          <Link target="_blank" href={creator?.linkedInUrl || "#"}>
-            <div className="flex items-center hover:underline">
+        <div
+          className={cn(
+            "text-xl text-orange-600 hover:text-orange-200",
+            isValidUrl ? "cursor-pointer" : "cursor-not-allowed"
+          )}
+        >
+          {isValidUrl ? (
+            <Link href={url} target="_blank" rel="noopener noreferrer">
+              <div className="flex items-center">
+                <div>Visit</div>
+                <MoveUpRight height={15} width={15} />
+              </div>
+            </Link>
+          ) : (
+            <div className="flex items-center">
               <div>Visit</div>
               <MoveUpRight height={15} width={15} />
             </div>
-          </Link>
+          )}
         </div>
       </div>
       <div>

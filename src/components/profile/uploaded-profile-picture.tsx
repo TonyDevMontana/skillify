@@ -37,7 +37,7 @@ export function UploadedProfilePicture({ imageUrl }: { imageUrl: string }) {
         height={240}
         width={240}
         priority={true}
-        onLoadingComplete={() => {
+        onLoad={() => {
           setIsLoading(false);
           setIsInputDisabled(false);
         }}

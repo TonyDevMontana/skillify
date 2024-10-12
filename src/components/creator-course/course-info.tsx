@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Pencil } from "lucide-react";
-import { CourseInfoDialog } from "@/components/course/course-info-dialog";
+import { CourseInfoDialog } from "@/components/creator-course/course-info-dialog";
 import { Course } from "@prisma/client";
 import { HtmlContent } from "@/components/html-content";
 import { ThumbnailPhoto } from "./thumbnail-photo";

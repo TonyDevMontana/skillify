@@ -14,7 +14,7 @@ import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export function AllCourses({
+export function CreatorCoursesTable({
   courses,
 }: {
   courses:
