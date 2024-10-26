@@ -4,13 +4,44 @@ import { ChevronLeft, FilePenLine } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { cache } from "react";
+import { VideoHandler } from "@/components/creator-course/video-handler";
+import { auth } from "@/server/auth";
 
-const getChapterData = cache(async (id: string) => {
-  return await db.chapter.findUnique({
+const getChapterData = cache(async (chapterId: string) => {
+  const session = await auth();
+
+  if (!session?.user) {
+    redirect("/sign-in");
+  }
+
+  const chapter = await db.chapter.findUnique({
     where: {
-      id,
+      id: chapterId,
+    },
+    include: {
+      video: true,
+      course: {
+        include: {
+          creator: {
+            include: {
+              user: true,
+            },
+          },
+        },
+      },
     },
   });
+
+  if (!chapter) {
+    return null;
+  }
+
+  // Check if the chapter belongs to the current user
+  if (chapter.course.creator.user.id !== session.user.id) {
+    redirect("/creator/courses");
+  }
+
+  return chapter;
 });
 
 export default async function ChapterContent({
@@ -44,7 +75,9 @@ export default async function ChapterContent({
         <div className="w-full">
           <ChapterInfo chapter={chapter} />
         </div>
-        <div className="w-full mt-6 lg:mt-0"></div>
+        <div className="w-full mt-6 lg:mt-0">
+          <VideoHandler chapter={chapter} />
+        </div>
       </div>
     </>
   );

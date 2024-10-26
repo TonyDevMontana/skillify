@@ -7,9 +7,11 @@ import {
 } from "@/components/ui/card";
 import { Pencil } from "lucide-react";
 import { Chapter } from "@prisma/client";
-import { ChapterInfoDialog } from "./chapter-info-dialog";
+import { ChapterInfoDialog } from "@/components/creator-course/chapter-info-dialog";
 import { Switch } from "@/components/ui/switch";
 import { HtmlContent } from "@/components/html-content";
+import { DeleteChapterDialog } from "@/components/creator-course/delete-chapter-dialog";
+import { ChapterVisible } from "./chapter-visible";
 
 export function ChapterInfo({
   chapter,
@@ -18,10 +20,15 @@ export function ChapterInfo({
 }) {
   return (
     <div>
+      <DeleteChapterDialog chapterId={chapter?.id ?? ""} />
+      <ChapterVisible
+        chapterId={chapter?.id ?? ""}
+        isVisible={chapter?.visible ?? false}
+      />
       <Card>
         <CardHeader>
           <CardTitle className="text-xl flex items-center gap-x-2">
-            <span className="mb-1">Chapter Data</span>
+            <span className="mb-1">Chapter Info</span>
             <ChapterInfoDialog chapter={chapter}>
               <Pencil
                 height={20}

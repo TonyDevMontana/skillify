@@ -45,7 +45,7 @@ export const createNewChapter = async (
           courseId: courseId,
           name: name,
           order: newOrder,
-          published: false,
+          visible: false,
           freePreview: false,
           description: "",
         },

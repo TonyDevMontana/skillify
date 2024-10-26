@@ -3,6 +3,7 @@ import { ProfileBio } from "@/components/profile/profile-bio";
 import { ProfilePhoto } from "@/components/profile/profile-photo";
 import { auth } from "@/server/auth";
 import db from "@/server/db";
+import { redirect } from "next/navigation";
 import { cache } from "react";
 
 const getCreatorProfile = cache(async (id: string) => {
@@ -16,6 +17,9 @@ const getCreatorProfile = cache(async (id: string) => {
 export async function CreatorProfile() {
   const session = await auth();
   const creatorId = session?.user.creatorId ?? "";
+  if (!creatorId) {
+    redirect("/browse");
+  }
   const creator = await getCreatorProfile(creatorId);
   return (
     <div className="flex flex-col lg:flex-row w-full gap-10">

@@ -9,7 +9,7 @@ export default async function CreatorsLayout({
   return (
     <div className="flex">
       <CreatorSidebar />
-      <div className="mt-32 ml-20 md:ml-52 w-full">{children}</div>
+      <div className="mt-28 ml-20 md:ml-52 w-full">{children}</div>
     </div>
   );
 }

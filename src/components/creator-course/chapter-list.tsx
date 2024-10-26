@@ -121,13 +121,13 @@ export default function ChapterList({
                       </Badge>
                       <Badge
                         className={cn(
-                          !chapter.published
+                          !chapter.visible
                             ? ""
-                            : "bg-green-500 px-5 hover:bg-green-600"
+                            : "bg-green-500 px-3 hover:bg-green-600"
                         )}
                         variant={"destructive"}
                       >
-                        {!chapter.published ? "Unpublished" : "Published"}
+                        {!chapter.visible ? "Hidden" : "Visible"}
                       </Badge>
                     </div>
                   </Link>

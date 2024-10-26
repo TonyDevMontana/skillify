@@ -65,7 +65,7 @@ model Chapter {
   course      Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
   name        String
   description String?
-  published   Boolean @default(false)
+  visible     Boolean @default(false)
   freePreview Boolean @default(false)
   order       Int
   video       Video?
@@ -81,17 +81,14 @@ model Video {
   chapterId String  @unique
   chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
 
-  status      String
-  assetId     String? @unique
-  playbackId  String? @unique
-  passthrough String  @unique
-  uploadId    String  @unique
-  teacherId   String
-  duration    Float?
-  aspectRatio String?
+  status     String
+  assetId    String? @unique
+  playbackId String? @unique
+  uploadId   String  @unique
+  duration   Float?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([chapterId])
+  @@index([chapterId, uploadId, assetId])
 }

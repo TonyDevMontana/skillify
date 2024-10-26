@@ -55,7 +55,9 @@ export function ThumbnailPhoto({
               <div className="flex justify-center">
                 <Upload className="text-black text-center" />
               </div>
-              <div className="text-black">Click to upload Thumbnail</div>
+              <div className="text-black">
+                Click to upload Thumbnail (upto 8MB)
+              </div>
             </div>
             <input
               type="file"
@@ -66,7 +68,6 @@ export function ThumbnailPhoto({
               )}
               onChange={setSelectedFile}
               disabled={isInputDisabled === true}
-              // ref={localFileInputRef}
             />
           </div>
         )}

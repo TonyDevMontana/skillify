@@ -6,6 +6,7 @@ import db from "@/server/db";
 import Link from "next/link";
 import { Box, ChevronLeft } from "lucide-react";
 import { cache } from "react";
+import { auth } from "@/server/auth";
 
 const ChapterList = dynamic(
   () => import("@/components/creator-course/chapter-list"),
@@ -18,10 +19,38 @@ const ChapterList = dynamic(
 );
 
 const getCourseData = cache(async (id: string) => {
-  return await db.course.findUnique({
+  const session = await auth();
+
+  if (!session?.user) {
+    redirect("/sign-in");
+  }
+
+  const course = await db.course.findUnique({
     where: { id },
-    include: { chapters: true },
+    include: {
+      chapters: {
+        orderBy: {
+          order: "asc",
+        },
+      },
+      creator: {
+        include: {
+          user: true,
+        },
+      },
+    },
   });
+
+  if (!course) {
+    redirect("/creator/courses");
+  }
+
+  // Verify course ownership
+  if (course.creator.user.id !== session.user.id) {
+    redirect("/creator/courses");
+  }
+
+  return course;
 });
 
 export async function CourseContent({ id }: { id: string }) {

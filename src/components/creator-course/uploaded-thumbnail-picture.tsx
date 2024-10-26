@@ -39,7 +39,7 @@ export function UploadedThumbnailPicture({
         height={240}
         width={384}
         priority={true}
-        onLoadingComplete={() => {
+        onLoad={() => {
           setIsLoading(false);
           setIsInputDisabled(false);
         }}
