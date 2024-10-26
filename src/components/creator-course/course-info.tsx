@@ -10,10 +10,12 @@ import { CourseInfoDialog } from "@/components/creator-course/course-info-dialog
 import { Course } from "@prisma/client";
 import { HtmlContent } from "@/components/html-content";
 import { ThumbnailPhoto } from "./thumbnail-photo";
+import { DeleteCourseDialog } from "./delete-course-dialog";
 
 export function CourseInfo({ course }: { course: Course | null | undefined }) {
   return (
     <div>
+      <DeleteCourseDialog courseId={course?.id ?? ""} />
       <Card>
         <CardHeader>
           <CardTitle className="text-xl flex items-center gap-x-2">

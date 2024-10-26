@@ -7,7 +7,7 @@ import { UploadedProfilePicture } from "@/components/profile/uploaded-profile-pi
 import { ProfilePictureDialog } from "@/components/profile/profile-picture-dialog";
 import { Spinner } from "@/components/spinner";
 
-export function ProfilePhoto({
+export function ProfilePictureInput({
   imageUrl,
 }: {
   imageUrl: string | null | undefined;
@@ -56,7 +56,6 @@ export function ProfilePhoto({
               )}
               onChange={setSelectedFile}
               disabled={isInputDisabled === true}
-              // ref={localFileInputRef}
             />
           </div>
         )}

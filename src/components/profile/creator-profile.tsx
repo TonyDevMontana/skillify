@@ -1,6 +1,6 @@
 import { About } from "@/components/profile/about";
 import { ProfileBio } from "@/components/profile/profile-bio";
-import { ProfilePhoto } from "@/components/profile/profile-photo";
+import { ProfilePictureInput } from "@/components/profile/profile-picture-input";
 import { auth } from "@/server/auth";
 import db from "@/server/db";
 import { redirect } from "next/navigation";
@@ -21,11 +21,12 @@ export async function CreatorProfile() {
     redirect("/browse");
   }
   const creator = await getCreatorProfile(creatorId);
+  // const imageUrl = creator?.pictureUrl;
   return (
     <div className="flex flex-col lg:flex-row w-full gap-10">
       <div className="flex flex-col lg:flex-col md:flex-row gap-6 mx-auto">
         <div className="mb-6 h-60 w-60">
-          <ProfilePhoto imageUrl={creator?.pictureUrl} />
+          <ProfilePictureInput imageUrl={creator?.pictureUrl} />
         </div>
         <div className="w-full">
           <ProfileBio creator={creator} />

@@ -36,7 +36,6 @@ const getChapterData = cache(async (chapterId: string) => {
     return null;
   }
 
-  // Check if the chapter belongs to the current user
   if (chapter.course.creator.user.id !== session.user.id) {
     redirect("/creator/courses");
   }

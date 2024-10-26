@@ -1,9 +1,9 @@
 "use server";
 
 import * as z from "zod";
-import { auth } from "../auth";
+import { auth } from "@/server/auth";
 import { deleteMuxVideo } from "./delete-mux-video";
-import db from "../db";
+import db from "@/server/db";
 import { revalidatePath } from "next/cache";
 
 const DeleteChapterSchema = z.object({

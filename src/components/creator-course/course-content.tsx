@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Box, ChevronLeft } from "lucide-react";
 import { cache } from "react";
 import { auth } from "@/server/auth";
+import PublishCourse from "@/components/creator-course/publish-course";
 
 const ChapterList = dynamic(
   () => import("@/components/creator-course/chapter-list"),
@@ -45,7 +46,6 @@ const getCourseData = cache(async (id: string) => {
     redirect("/creator/courses");
   }
 
-  // Verify course ownership
   if (course.creator.user.id !== session.user.id) {
     redirect("/creator/courses");
   }
@@ -79,6 +79,7 @@ export async function CourseContent({ id }: { id: string }) {
           <CourseInfo course={course} />
         </div>
         <div className="w-full mt-6 lg:mt-0">
+          <PublishCourse courseId={course.id} published={course.published} />
           <AddVideo courseId={course.id} />
           <ChapterList courseId={id} chapters={course.chapters} />
         </div>

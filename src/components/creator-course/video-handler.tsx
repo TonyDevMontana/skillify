@@ -151,6 +151,7 @@ export function VideoHandler({
         <MuxUploader
           endpoint={upload.uploadUrl}
           className="w-full aspect-[16/9]"
+          onUploadStart={() => {}}
           onSuccess={async () => {
             const response = await handleMuxVideoProcessing({
               chapterId: chapter.id,
@@ -173,7 +174,7 @@ export function VideoHandler({
               });
             }
           }}
-        />
+        ></MuxUploader>
         <div className="mt-4">
           <div className="text-3xl">{chapter.name}</div>
         </div>
