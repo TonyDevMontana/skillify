@@ -15,7 +15,7 @@ function Courses() {
         </div>
       }
     >
-      <div className="px-14 md:mx-0 w-full">
+      <div className="px-4 sm:px-8 md:px-14 md:mx-0 w-full">
         <NewCourse>
           <Button className="mb-6">Create A New Course</Button>
         </NewCourse>

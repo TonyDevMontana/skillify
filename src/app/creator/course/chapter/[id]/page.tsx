@@ -13,7 +13,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div className="px-14 md:mx-0 w-full">
+    <div className="px-4 sm:px-8 md:px-14  md:mx-0 w-full">
       <Suspense
         fallback={
           <div className="flex justify-center items-center h-[calc(100vh-128px)]">
