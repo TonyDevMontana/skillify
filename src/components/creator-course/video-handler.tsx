@@ -129,10 +129,18 @@ export function VideoHandler({
                         setIsPlayerReady(false);
                         await initializeUpload();
                       } else {
-                        toast({
-                          title: "Video Deletion failed",
-                          variant: "destructive",
-                        });
+                        if (response.cannotDelete) {
+                          toast({
+                            title: "Cannot delete Last Video",
+                            description:
+                              "Published course should maintain one valid chapter",
+                            variant: "destructive",
+                          });
+                        } else
+                          toast({
+                            title: "Video Deletion failed",
+                            variant: "destructive",
+                          });
                       }
                     }}
                   >

@@ -54,6 +54,7 @@ export function CourseInfoDialog({
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsOpen(false);
+    toast({ title: "Saving..." });
     const result = await updateCourseData({
       courseId: course?.id || "",
       name: values.name,
@@ -63,6 +64,8 @@ export function CourseInfoDialog({
 
     if (!result.success) {
       toast({ title: "Something went wrong", variant: "destructive" });
+    } else {
+      toast({ title: "Course Data Updated!", variant: "message" });
     }
   }
 

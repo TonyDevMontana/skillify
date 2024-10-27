@@ -26,7 +26,7 @@ export default function UserButton() {
   if (!mounted) {
     return null;
   }
-  // console.log(session.data?.user.image);
+
   return session.status === "loading" ? null : (
     <div>
       {session.status === "authenticated" ? (
@@ -40,8 +40,8 @@ export default function UserButton() {
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem>My Courses</DropdownMenuItem>
-            <DropdownMenuItem>Wishlist</DropdownMenuItem>
+            {/* <DropdownMenuItem>My Courses</DropdownMenuItem>
+            <DropdownMenuItem>Wishlist</DropdownMenuItem> */}
             <DropdownMenuItem
               onClick={() => {
                 router.push(`/creator/courses`);

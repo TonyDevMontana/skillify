@@ -14,6 +14,7 @@ type DeleteChapterType = z.infer<typeof DeleteChapterSchema>;
 
 type DeleteChapterReturn = {
   success: boolean;
+  cannotDelete?: boolean;
   data?: { message: string; courseId: string };
   error?: string;
 };
@@ -30,7 +31,41 @@ export const deleteChapter = async (
     const validatedInput = DeleteChapterSchema.parse(input);
     const { chapterId } = validatedInput;
 
-    const videoData = await db.video.findUnique({ where: { chapterId } });
+    const videoData = await db.video.findUnique({
+      where: { chapterId },
+      include: {
+        chapter: {
+          include: {
+            course: { include: { chapters: { include: { video: true } } } },
+          },
+        },
+      },
+    });
+
+    if (!videoData) {
+      return { success: false, error: "Video not found" };
+    }
+
+    const otherVisibleChaptersWithVideo =
+      videoData.chapter.course.chapters.filter(
+        (chapter) =>
+          chapter.id !== chapterId && // Exclude current chapter
+          chapter.visible &&
+          chapter.video &&
+          chapter.video.status === "ready"
+      ).length;
+
+    if (
+      otherVisibleChaptersWithVideo === 0 &&
+      videoData.chapter.course.published
+    ) {
+      return {
+        success: false,
+        cannotDelete: true,
+        error:
+          "Cannot delete the last chapter. Course must maintain at least one visible chapter with a processed video",
+      };
+    }
 
     if (videoData?.playbackId) {
       const deleteVideo = await deleteMuxVideo({ chapterId });

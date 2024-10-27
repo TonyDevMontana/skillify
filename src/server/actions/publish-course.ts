@@ -49,7 +49,8 @@ export async function publishCourse(
     }
 
     const hasChapterWithVideo = course.chapters.some(
-      (chapter) => chapter.video && chapter.video.status === "ready"
+      (chapter) =>
+        chapter.video && chapter.video.status === "ready" && chapter.visible
     );
 
     if (!hasChapterWithVideo) {

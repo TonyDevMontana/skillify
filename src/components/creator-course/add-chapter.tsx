@@ -28,14 +28,17 @@ function AddVideo({ courseId }: { courseId: string }) {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    form.reset();
+    toast({ title: "Creating Chapter..." });
     const result = await createNewChapter({
       courseId: courseId,
       name: values.chaptername,
     });
-    form.reset();
 
     if (!result.success) {
       toast({ title: "Something went wrong", variant: "destructive" });
+    } else {
+      toast({ title: "Chapter Created!", variant: "message" });
     }
   }
   return (
@@ -54,7 +57,6 @@ function AddVideo({ courseId }: { courseId: string }) {
                   <FormItem className="w-full">
                     <FormControl>
                       <Input
-                        autoFocus
                         placeholder="Chapter name"
                         {...field}
                         className="w-full"

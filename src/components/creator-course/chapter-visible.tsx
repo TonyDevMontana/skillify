@@ -3,6 +3,7 @@
 import { toast } from "@/hooks/use-toast";
 import { Switch } from "@/components/ui/switch";
 import { updateChapterVisibility } from "@/server/actions/update-chapter-visibility";
+import { useState } from "react";
 
 export function ChapterVisible({
   chapterId,
@@ -11,7 +12,9 @@ export function ChapterVisible({
   chapterId: string;
   isVisible: boolean;
 }) {
+  const [checked, setChecked] = useState<boolean>(isVisible);
   async function onCheckedChange(checked: boolean) {
+    setChecked(checked);
     const response = await updateChapterVisibility({
       chapterId,
       visible: checked,
@@ -23,10 +26,19 @@ export function ChapterVisible({
         variant: "message",
       });
     } else {
-      toast({
-        title: "Something went wrong",
-        variant: "destructive",
-      });
+      setChecked(isVisible);
+      if (response.cannotDelete) {
+        toast({
+          title: "Cannot disable visibility",
+          description:
+            "Published Course must maintain one valid chapter with video",
+          variant: "destructive",
+        });
+      } else
+        toast({
+          title: "Something went wrong",
+          variant: "destructive",
+        });
     }
   }
 
@@ -39,7 +51,7 @@ export function ChapterVisible({
             Hidden Chapter is not shown to the viewer
           </div>
         </div>
-        <Switch checked={isVisible} onCheckedChange={onCheckedChange} />
+        <Switch checked={checked} onCheckedChange={onCheckedChange} />
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ export const revalidate = 3600;
 
 export default function Profile() {
   return (
-    <div className="px-8 lg:px-14 md:mx-0 w-full mb-8">
+    <div className="px-4 sm:px-8 md:px-14  md:mx-0 w-full mb-8">
       <Suspense
         fallback={
           <div className="flex justify-center items-center h-[calc(100vh-128px)]">

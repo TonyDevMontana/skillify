@@ -55,6 +55,7 @@ export function ChapterInfoDialog({
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsOpen(false);
+    toast({ title: "Saving..." });
     const result = await updateChapterInfo({
       chapterId: chapter?.id ?? "",
       name: values.name,
@@ -64,6 +65,8 @@ export function ChapterInfoDialog({
 
     if (!result.success) {
       toast({ title: "Something went wrong", variant: "destructive" });
+    } else {
+      toast({ title: "Chapter Info updated", variant: "message" });
     }
   }
 

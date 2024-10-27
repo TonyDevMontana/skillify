@@ -47,6 +47,7 @@ export function DeleteChapterDialog({ chapterId }: { chapterId: string }) {
               variant="destructive"
               onClick={async () => {
                 setOpen(false);
+                toast({ title: "Deleting..." });
                 const response = await deleteChapter({ chapterId });
 
                 if (response.success) {
@@ -56,10 +57,18 @@ export function DeleteChapterDialog({ chapterId }: { chapterId: string }) {
                   });
                   router.push(`/creator/course/${response.data?.courseId}`);
                 } else {
-                  toast({
-                    title: "Chapter Deletion failed",
-                    variant: "destructive",
-                  });
+                  if (response.cannotDelete) {
+                    toast({
+                      title: "Cannot delete Last Chapter",
+                      description:
+                        "Published course should maintain one valid chapter",
+                      variant: "destructive",
+                    });
+                  } else
+                    toast({
+                      title: "Chapter Deletion failed",
+                      variant: "destructive",
+                    });
                 }
               }}
             >

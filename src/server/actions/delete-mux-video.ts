@@ -15,6 +15,7 @@ type DeleteMuxInput = z.infer<typeof DeleteMuxSchema>;
 type DeleteMuxReturn = {
   success: boolean;
   message?: string;
+  cannotDelete?: boolean;
   error?: string;
 };
 
@@ -30,12 +31,58 @@ export const deleteMuxVideo = async (
     const validatedInput = DeleteMuxSchema.parse(input);
     const { chapterId } = validatedInput;
 
-    const chapter = await db.video.findUnique({
+    const video = await db.video.findUnique({
       where: {
         chapterId,
       },
+      include: {
+        chapter: {
+          include: {
+            course: {
+              include: {
+                chapters: {
+                  include: {
+                    video: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
     });
-    await mux.video.assets.delete(chapter?.assetId || "");
+
+    if (!video) {
+      return { success: false, error: "Video not found" };
+    }
+
+    // Count visible chapters with ready videos, excluding the current chapter
+    const otherVisibleChaptersWithVideo = video.chapter.course.chapters.filter(
+      (chapter) =>
+        chapter.id !== chapterId && // Exclude current chapter
+        chapter.visible &&
+        chapter.video &&
+        chapter.video.status === "ready"
+    ).length;
+
+    // If this is the last valid video and the course is published, prevent deletion
+    if (otherVisibleChaptersWithVideo === 0 && video.chapter.course.published) {
+      return {
+        success: false,
+        cannotDelete: true,
+        error:
+          "Cannot delete the last video. Course must maintain at least one visible chapter with a processed video",
+      };
+    }
+
+    if (video.assetId) {
+      try {
+        await mux.video.assets.delete(video.assetId);
+      } catch (muxError) {
+        console.error("[MUX_DELETE_ERROR]", muxError);
+        // Continue with database cleanup even if Mux deletion fails
+      }
+    }
 
     await db.video.update({
       where: { chapterId },

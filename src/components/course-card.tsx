@@ -1,4 +1,3 @@
-"use client";
 import { Course } from "@prisma/client";
 import Image from "next/image";
 

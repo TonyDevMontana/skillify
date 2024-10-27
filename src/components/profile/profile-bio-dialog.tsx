@@ -58,9 +58,12 @@ export function ProfileBioDialog({
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsOpen(false);
+    toast({ title: "Saving..." });
     const result = await updateProfileBio(values);
     if (!result.success) {
       toast({ title: "Something went wrong", variant: "destructive" });
+    } else {
+      toast({ title: "Profile Bio Updated!", variant: "message" });
     }
   };
 

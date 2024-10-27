@@ -37,7 +37,6 @@ export function CreatorCoursesTable({
   return (
     <>
       <Input
-        autoFocus
         type="text"
         placeholder="Search courses by name..."
         value={searchQuery}
@@ -79,7 +78,7 @@ export function CreatorCoursesTable({
                     <Badge className="font-semibold">FREE</Badge>
                   ) : (
                     <Badge className="bg-green-500 hover:bg-green-600">
-                      Rs. {item.price.toString()}
+                      ₹{item.price.toString()}
                     </Badge>
                   )}
                 </TableCell>
