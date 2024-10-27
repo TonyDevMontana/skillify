@@ -1,11 +1,11 @@
-import { SidebarItem } from "./sidebar-item";
+import { SidebarItem } from "@/components/sidebar/sidebar-item";
+import { SidebarContainer } from "@/components/sidebar/sidebar-container";
 import {
   ArrowBigLeft,
   ChartColumnIncreasing,
   Goal,
   UserRoundPen,
 } from "lucide-react";
-import { SidebarContainer } from "./sidebar-container";
 
 export async function CreatorSidebar() {
   const sidebarItemsList = [

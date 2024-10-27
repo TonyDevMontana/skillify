@@ -43,7 +43,7 @@ export function ThumbnailPhoto({
 
   return (
     <>
-      <div className="relative h-60 w-96">
+      <div className="relative h-40 md:h-60 w-full md:w-96">
         {imageUrl ? (
           <UploadedThumbnailPicture
             imageUrl={imageUrl}

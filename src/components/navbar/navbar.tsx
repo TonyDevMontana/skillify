@@ -9,7 +9,6 @@ const UserButton = dynamic(() => import("@/components/navbar/user-button"), {
   ssr: false,
   loading: () => null,
 });
-// import UserButton from "./user-button";
 
 export const Navbar = () => {
   const pathname = usePathname();
@@ -28,7 +27,9 @@ export const Navbar = () => {
           </div>
         </Link>
         <div className="flex gap-x-3 items-center">
-          <UserButton />
+          <div className="mt-2">
+            <UserButton />
+          </div>
           <ModeToggle />
         </div>
       </div>

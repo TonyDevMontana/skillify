@@ -62,7 +62,7 @@ export function About({ initialValue }: { initialValue: string }) {
       )}
       <Tiptap
         value={initialValue}
-        className={"min-h-96 max-w-[350px]"}
+        className={"min-h-96 max-w-[450px]"}
         setValue={setValue}
         editable={isEditable}
         placeholder="Write about yourself in youn public creator's profile"
