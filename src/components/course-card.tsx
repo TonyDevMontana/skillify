@@ -1,5 +1,6 @@
 import { Course } from "@prisma/client";
 import Image from "next/image";
+import Link from "next/link";
 
 export const CourseCard = ({
   course,
@@ -11,7 +12,10 @@ export const CourseCard = ({
   const imageUrl = course.thumbnailUrl ?? "/banner_placeholder.png";
 
   return (
-    <div className="group relative flex h-full w-full flex-col overflow-hidden rounded-2xl bg-primary/5 transition-all duration-300 hover:-translate-y-2 shadow-lg">
+    <Link
+      className="group relative flex h-full w-full flex-col overflow-hidden rounded-2xl bg-primary/5 transition-all duration-300 hover:-translate-y-2 shadow-lg"
+      href={`/course/${course.id}`}
+    >
       <div className="aspect-video relative w-full">
         <Image
           src={imageUrl}
@@ -38,7 +42,7 @@ export const CourseCard = ({
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

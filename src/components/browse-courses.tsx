@@ -14,6 +14,9 @@ async function BrowseCourses() {
         },
       },
     },
+    // orderBy: {
+    //   createdAt: "desc",
+    // },
   });
 
   return (

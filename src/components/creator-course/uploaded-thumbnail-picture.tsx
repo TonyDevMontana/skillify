@@ -28,16 +28,17 @@ export function UploadedThumbnailPicture({
     (state) => state.setIsInputDisabled
   );
   return (
-    <div className="relative h-40 md:h-60 w-full md:w-96">
+    <div className="relative h-60 sm:h-40 w-60 sm:w-96">
       {isLoading && (
         <div className="absolute inset-0 bg-muted animate-pulse rounded-md" />
       )}
       <Image
-        className="rounded-md object-cover"
         src={imageUrl}
-        alt="profile picture"
-        fill
-        sizes="(max-width: 768px) 100vw, 384px"
+        alt={"profile"}
+        width={0}
+        height={0}
+        sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+        style={{ width: "100%", height: "auto" }}
         priority={true}
         onLoad={() => {
           setIsLoading(false);

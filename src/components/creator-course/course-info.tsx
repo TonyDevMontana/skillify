@@ -38,11 +38,13 @@ export function CourseInfo({ course }: { course: Course | null | undefined }) {
           <CardDescription>{course?.price}</CardDescription>
         </CardContent>
         <CardContent>
-          <span>Thumbnail:</span>
-          <ThumbnailPhoto
-            imageUrl={course?.thumbnailUrl}
-            courseId={course?.id}
-          />
+          <div className="mb-0 sm:mb-12 md:mb-0 md:w-1/3">
+            <span>Thumbnail:</span>
+            <ThumbnailPhoto
+              imageUrl={course?.thumbnailUrl}
+              courseId={course?.id}
+            />
+          </div>
         </CardContent>
         <CardContent>
           <span>Description:</span>

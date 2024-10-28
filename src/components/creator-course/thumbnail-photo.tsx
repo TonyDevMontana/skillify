@@ -35,7 +35,7 @@ export function ThumbnailPhoto({
 
   if (isPictureLoading) {
     return (
-      <div className="h-60 w-60 flex justify-center items-center">
+      <div className="h-60 sm:h-40 w-60 sm:w-96 flex justify-center items-center">
         <Spinner />
       </div>
     );

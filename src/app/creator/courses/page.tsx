@@ -10,7 +10,7 @@ function Courses() {
   return (
     <Suspense
       fallback={
-        <div className="flex justify-center items-center h-[calc(100vh-128px)]">
+        <div className="flex justify-center items-center h-[calc(100vh-11rem)] md:h-[calc(100vh-128px)]">
           <Spinner />
         </div>
       }
