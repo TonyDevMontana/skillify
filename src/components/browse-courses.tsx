@@ -7,9 +7,16 @@ async function BrowseCourses() {
     where: {
       published: true,
     },
-     orderBy: {
-       createdAt: "desc",
-     },
+    include: {
+      creator: {
+        select: {
+          name: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
   return (
@@ -17,25 +24,25 @@ async function BrowseCourses() {
       {courses.map((course) => (
         <CourseCard
           course={course}
-          creatorName={course.creator.user.name ?? ""}
+          creatorName={course.creator.name ?? ""}
           key={course.id}
         />
       ))}
       <CourseCard
         course={courses[0]}
-        creatorName={courses[0].creator.user.name ?? ""}
+        creatorName={courses[0].creator.name ?? ""}
       />
       <CourseCard
         course={courses[0]}
-        creatorName={courses[0].creator.user.name ?? ""}
+        creatorName={courses[0].creator.name ?? ""}
       />
       <CourseCard
         course={courses[0]}
-        creatorName={courses[0].creator.user.name ?? ""}
+        creatorName={courses[0].creator.name ?? ""}
       />
       <CourseCard
         course={courses[0]}
-        creatorName={courses[0].creator.user.name ?? ""}
+        creatorName={courses[0].creator.name ?? ""}
       />
     </section>
   );
