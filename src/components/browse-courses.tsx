@@ -7,16 +7,9 @@ async function BrowseCourses() {
     where: {
       published: true,
     },
-    include: {
-      creator: {
-        include: {
-          user: true,
-        },
-      },
-    },
-    // orderBy: {
-    //   createdAt: "desc",
-    // },
+     orderBy: {
+       createdAt: "desc",
+     },
   });
 
   return (
