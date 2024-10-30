@@ -16,7 +16,8 @@ type UpdateChapterVisibilityType = z.infer<
 type UpdateChapterVisibilityReturn = {
   success: boolean;
   error?: string;
-  cannotDelete?: boolean;
+  cannotHide?: boolean;
+  cannotMakeVisible?: boolean;
   message?: string;
 };
 
@@ -32,18 +33,31 @@ export const updateChapterVisibility = async (
     const validatedInput = UpdateChapterVisibilitySchema.parse(input);
     const { chapterId, visible } = validatedInput;
 
-    if (!visible) {
-      const videoData = await db.video.findUnique({
-        where: { chapterId },
-        include: {
-          chapter: {
-            include: {
-              course: { include: { chapters: { include: { video: true } } } },
-            },
+    const videoData = await db.video.findUnique({
+      where: { chapterId },
+      include: {
+        chapter: {
+          include: {
+            course: { include: { chapters: { include: { video: true } } } },
           },
         },
-      });
+      },
+    });
 
+    if (visible) {
+      if (!videoData) {
+        return { success: false, error: "Video not found" };
+      }
+      if (!videoData.playbackId && videoData.status !== "ready") {
+        return {
+          success: false,
+          cannotMakeVisible: true,
+          error: "Add a video atleast",
+        };
+      }
+    }
+
+    if (!visible) {
       if (!videoData) {
         return { success: false, error: "Video not found" };
       }
@@ -63,7 +77,7 @@ export const updateChapterVisibility = async (
       ) {
         return {
           success: false,
-          cannotDelete: true,
+          cannotHide: true,
           error:
             "Course must maintain at least one visible chapter with a processed video",
         };

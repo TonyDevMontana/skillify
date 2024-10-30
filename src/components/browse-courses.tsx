@@ -19,6 +19,8 @@ async function BrowseCourses() {
     },
   });
 
+  console.log(courses);
+
   return (
     <section className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {courses.map((course) => (
@@ -28,7 +30,7 @@ async function BrowseCourses() {
           key={course.id}
         />
       ))}
-      <CourseCard
+      {/* <CourseCard
         course={courses[0]}
         creatorName={courses[0].creator.name ?? ""}
       />
@@ -43,7 +45,7 @@ async function BrowseCourses() {
       <CourseCard
         course={courses[0]}
         creatorName={courses[0].creator.name ?? ""}
-      />
+      /> */}
     </section>
   );
 }

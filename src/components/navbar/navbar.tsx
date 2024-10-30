@@ -27,7 +27,7 @@ export const Navbar = () => {
           </div>
         </Link>
         <div className="flex gap-x-3 items-center">
-          <div className="mt-2">
+          <div className="">
             <UserButton />
           </div>
           <ModeToggle />

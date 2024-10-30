@@ -27,18 +27,29 @@ export function ChapterVisible({
       });
     } else {
       setChecked(isVisible);
-      if (response.cannotDelete) {
+
+      if (response.cannotMakeVisible) {
+        toast({
+          title: "Upload Video First",
+          description: "Cannot make a video visible without a video",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (response.cannotHide) {
         toast({
           title: "Cannot disable visibility",
           description:
             "Published Course must maintain one valid chapter with video",
           variant: "destructive",
         });
-      } else
-        toast({
-          title: "Something went wrong",
-          variant: "destructive",
-        });
+        return;
+      }
+      toast({
+        title: "Something went wrong",
+        variant: "destructive",
+      });
     }
   }
 
