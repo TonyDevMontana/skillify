@@ -71,6 +71,7 @@ export async function publishCourse(
     });
 
     revalidatePath(`/creator/course/${courseId}`);
+    revalidatePath("/browse");
     if (publish) return { success: true, message: "Course Published" };
     return { success: true, message: "Course Unpublished" };
   } catch (error) {
