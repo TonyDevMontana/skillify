@@ -2,8 +2,6 @@ import { CreatorProfile } from "@/components/profile/creator-profile";
 import { Spinner } from "@/components/spinner";
 import { Suspense } from "react";
 
-export const revalidate = 3600;
-
 export default function Profile() {
   return (
     <div className="px-4 sm:px-8 md:px-14  md:mx-0 w-full mb-8">

@@ -28,9 +28,9 @@ export function UploadedThumbnailPicture({
     (state) => state.setIsInputDisabled
   );
   return (
-    <div className="relative h-60 sm:h-40 w-60 sm:w-96">
+    <div className="relative sm:h-60 sm:w-96 h-40 w-60">
       {isLoading && (
-        <div className="absolute inset-0 bg-muted animate-pulse rounded-md" />
+        <div className="sm:h-60 sm:w-96 h-40 w-60 bg-muted animate-pulse rounded-md" />
       )}
       <Image
         src={imageUrl}

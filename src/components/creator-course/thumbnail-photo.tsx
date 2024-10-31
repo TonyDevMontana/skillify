@@ -43,7 +43,7 @@ export function ThumbnailPhoto({
 
   return (
     <>
-      <div className="relative h-40 md:h-60 w-full md:w-96">
+      <div className="relative h-40 w-60 sm:h-60 sm:w-96">
         {imageUrl ? (
           <UploadedThumbnailPicture
             imageUrl={imageUrl}
@@ -53,9 +53,9 @@ export function ThumbnailPhoto({
           <div className="h-full w-full bg-orange-100 rounded-lg flex justify-center items-center cursor-pointer">
             <div>
               <div className="flex justify-center">
-                <Upload className="text-black text-center" />
+                <Upload className="text-black text-center text-xs w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <div className="text-black">
+              <div className="text-black text-xs sm:text-sm">
                 Click to upload Thumbnail (upto 8MB)
               </div>
             </div>

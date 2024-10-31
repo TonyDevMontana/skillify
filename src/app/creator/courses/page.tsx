@@ -4,8 +4,6 @@ import { Spinner } from "@/components/spinner";
 import { Button } from "@/components/ui/button";
 import { Suspense } from "react";
 
-export const revalidate = 3600;
-
 function Courses() {
   return (
     <Suspense

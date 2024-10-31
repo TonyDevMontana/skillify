@@ -4,8 +4,6 @@ import { auth } from "@/server/auth";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
-export const revalidate = 3600;
-
 export default async function Page({ params }: { params: { id: string } }) {
   const session = await auth();
   if (!session?.user) {

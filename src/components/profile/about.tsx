@@ -65,7 +65,7 @@ export function About({ initialValue }: { initialValue: string }) {
         className={"min-h-96 max-w-[450px]"}
         setValue={setValue}
         editable={isEditable}
-        placeholder="Write about yourself in youn public creator's profile"
+        placeholder="Write about yourself in your public creator's profile"
       />
     </div>
   );

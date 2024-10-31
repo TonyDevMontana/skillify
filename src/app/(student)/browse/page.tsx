@@ -2,8 +2,6 @@ import BrowseCourses from "@/components/browse-courses";
 import { Spinner } from "@/components/spinner";
 import React, { Suspense } from "react";
 
-export const revalidate = 3600;
-
 export default async function Browse() {
   return (
     <div className="px-2 py-8">
