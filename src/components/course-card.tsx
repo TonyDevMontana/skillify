@@ -46,12 +46,12 @@ export const CourseCard = ({
   );
 };
 
-export const CourseSkeleton = () => {
-  return (
-    <div className="animate-pulse">
-      <div className="aspect-video rounded-2xl bg-primary/10"></div>
-      <div className="mt-4 h-6 w-3/4 rounded bg-primary/10"></div>
-      <div className="mt-2 h-4 w-1/2 rounded bg-primary/10"></div>
-    </div>
-  );
-};
+// export const CourseSkeleton = () => {
+//   return (
+//     <div className="animate-pulse">
+//       <div className="aspect-video rounded-2xl bg-primary/10"></div>
+//       <div className="mt-4 h-6 w-3/4 rounded bg-primary/10"></div>
+//       <div className="mt-2 h-4 w-1/2 rounded bg-primary/10"></div>
+//     </div>
+//   );
+// };
